@@ -34,3 +34,5 @@ Plus d'informations sont données en commentaires de ce projet, veillez à bien 
 Bon courage !
 
 ![Image "Keep calm and write unit test"](./keepcalm-unit-test.png)
+
+tdd © 2025 by Afpa is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International 
