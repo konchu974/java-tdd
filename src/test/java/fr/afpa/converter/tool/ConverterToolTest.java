@@ -1,9 +1,9 @@
 package fr.afpa.converter.tool;
                                                                                       
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /***
  * Classe regroupant les tests à compléter.
@@ -34,6 +34,8 @@ class ConverterToolTest {
         assertEquals(2, ConverterTool.binaryToDecimal(bin1));
 
         // 2. Test d'un autre donnée de test
+        String bin2 = "11";
+        assertEquals(3, ConverterTool.binaryToDecimal(bin2));
         // ...
 
         // Bien faire attention de bien penser aux erreurs dans la conception du jeu de test
@@ -43,14 +45,66 @@ class ConverterToolTest {
     @Test
     void testDecimalToBinary() {
         // TODO : compléter le test
+
+        int dec1 = 45;
+
+        assertEquals("101101", ConverterTool.decimalToBinary(dec1));
     }
-    
+
     @DisplayName("Vérification de la nature hexadécimale d'une chaîne de caractère")
     @Test
     void testIfHexadecimal() {
-        
-        // TODO : compléter le test
+        assertTrue(ConverterTool.checkIfHexadecimal("1A3F"));
+        assertTrue(ConverterTool.checkIfHexadecimal("abcdef"));
+        assertFalse(ConverterTool.checkIfHexadecimal("1G3F"));
     }
 
+    @DisplayName("Vérification de la nature décimale d'une chaîne de caractère")
+    @Test
+    void testIfDecimal() {
+        assertFalse(ConverterTool.checkIfDecimal("1A3F"));
+        assertTrue(ConverterTool.checkIfDecimal("12838"));
+        assertTrue(ConverterTool.checkIfDecimal("1929"));
+    }
+
+
+
     // TODO : ajouter les fonctions de test pour chacune de celles qui sont utilisées dans l'application
+
+    @DisplayName("Conversion des nombres binaire en hexa")
+    @Test
+    void binaryToHexadecimal() {
+
+        String bin1 = "11011011";
+
+        assertEquals("DB", ConverterTool.binaryToHexadecimal(bin1));
+
+    }
+
+    @DisplayName("Conversion des nombres decimaux en hexa")
+    @Test
+    void decimalToHexadecimal() {
+
+        int dec1 = 255;
+
+        assertEquals("FF", ConverterTool.decimalToHexadecimal(dec1));
+
+    }
+    @DisplayName("Conversion hexadécimal vers décimal")
+    @Test
+    void hexadecimalToDecimal() {
+        assertEquals(255, ConverterTool.hexadecimalToDecimal("FF"));
+        assertEquals(16, ConverterTool.hexadecimalToDecimal("10"));
+        assertEquals(0, ConverterTool.hexadecimalToDecimal("0"));
+    }
+
+    @DisplayName("Conversion hexadécimal vers binaire")
+    @Test
+    void hexadecimalToBinary() {
+        assertEquals("11011011", ConverterTool.hexadecimalToBinary("DB"));
+        assertEquals("00000000", ConverterTool.hexadecimalToBinary("00"));
+        assertEquals("1111", ConverterTool.hexadecimalToBinary("F"));
+    }
+
+
 }

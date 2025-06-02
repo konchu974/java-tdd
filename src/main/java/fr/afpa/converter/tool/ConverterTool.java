@@ -26,7 +26,13 @@ public final class ConverterTool {
      * @return Répresentation décimale du nombre, -1 si la conversion est impossible
      */
     public static int binaryToDecimal(String binary) {
-        return -1;
+        int result = 0;
+        for (int i = 0; i < binary.length(); i++) {
+            int bit = Integer.parseInt(binary.substring(i, i + 1), 2);
+            result += bit * Math.pow(2, binary.length() - 1 - i);
+        }
+
+        return result;
     }
 
     /**
@@ -36,7 +42,12 @@ public final class ConverterTool {
      * @return Répresentation binaire du nombre
      */
     public static String decimalToBinary(int decimal) {
-        return null;
+        String result = "";
+        while (decimal > 0) {
+            result += (decimal % 2);
+            decimal /= 2;
+        }
+        return result;
     }
 
     /**
@@ -47,7 +58,41 @@ public final class ConverterTool {
      * @return Répresentation héxadécimale du nombre
      */
     public static String binaryToHexadecimal(String binary) {
-        return null;
+        String result = "";
+
+        String[] binaires = {
+                "0000", "0001", "0010", "0011",
+                "0100", "0101", "0110", "0111",
+                "1000", "1001", "1010", "1011",
+                "1100", "1101", "1110", "1111"
+        };
+
+        char[] hexadecimaux = {
+                '0', '1', '2', '3',
+                '4', '5', '6', '7',
+                '8', '9', 'A', 'B',
+                'C', 'D', 'E', 'F'
+        };
+
+
+        while (binary.length() % 4 != 0) {
+        binary = "0" + binary ;
+        }
+//        String[] binaryPart = new String[binary.length()/4];
+
+        for (int i = 0; i < binary.length(); i+= 4) {
+            int fin = Math.min(i + 4, binary.length());
+            String sousChaine = binary.substring(i, fin);
+
+            for (int j = 0; j < hexadecimaux.length; j++) {
+                if (sousChaine.equals(binaires[j])) {
+                    result += hexadecimaux[j];
+                }
+            }
+        }
+
+
+        return result;
     }
 
     /**
@@ -57,7 +102,21 @@ public final class ConverterTool {
      * @return Répresentation binaire du nombre
      */
     public static String decimalToHexadecimal(int decimal) {
-        return null;
+        String result = "";
+        char[] hexadecimaux = {
+                '0', '1', '2', '3',
+                '4', '5', '6', '7',
+                '8', '9', 'A', 'B',
+                'C', 'D', 'E', 'F'
+        };
+
+        while (decimal > 0) {
+            int remainder = decimal % 16;
+            result = hexadecimaux[remainder] + result;
+            decimal = decimal / 16;
+        }
+
+        return result;
     }
 
     /**
@@ -67,11 +126,34 @@ public final class ConverterTool {
      * @return Répresentation binaire du nombre
      */
     public static int hexadecimalToDecimal(String hexadecimal) {
-        return -1;
+        int result = Integer.parseInt(hexadecimal, 16);;
+        return result;
     }
 
     public static String hexadecimalToBinary(String hex) {
-        return null;
+        String result = "";
+        String[] binaires = {
+                "0000", "0001", "0010", "0011",
+                "0100", "0101", "0110", "0111",
+                "1000", "1001", "1010", "1011",
+                "1100", "1101", "1110", "1111"
+        };
+
+        char[] hexadecimaux = {
+                '0', '1', '2', '3',
+                '4', '5', '6', '7',
+                '8', '9', 'A', 'B',
+                'C', 'D', 'E', 'F'
+        };
+
+        for (int i = 0; i < hex.length(); i++) {
+            for (int j = 0; j < hexadecimaux.length; j++) {
+                if ( hexadecimaux[j] == hex.charAt(i)) {
+                    result += binaires[j];
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -84,7 +166,7 @@ public final class ConverterTool {
      */
     public static boolean checkIfHexadecimal(String toCheck) {
         // TODO vérification par l'utilisation d'une REGEX
-        return false;
+        return toCheck != null && toCheck.matches("^(0[xX])?[0-9a-fA-F]+$");
     }
 
     /**
@@ -96,6 +178,5 @@ public final class ConverterTool {
      */
     public static boolean checkIfDecimal(String toCheck) {
         // TODO vérification par l'utilisation d'une REGEX
-        return false;
-    }
+        return toCheck != null && toCheck.matches("^-?[0-9]+$");    }
 }
