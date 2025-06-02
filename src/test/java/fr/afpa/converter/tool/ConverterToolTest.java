@@ -79,6 +79,7 @@ class ConverterToolTest {
 
         assertEquals("DB", ConverterTool.binaryToHexadecimal(bin1));
 
+
     }
 
     @DisplayName("Conversion des nombres decimaux en hexa")

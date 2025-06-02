@@ -78,7 +78,6 @@ public final class ConverterTool {
         while (binary.length() % 4 != 0) {
         binary = "0" + binary ;
         }
-//        String[] binaryPart = new String[binary.length()/4];
 
         for (int i = 0; i < binary.length(); i+= 4) {
             int fin = Math.min(i + 4, binary.length());
