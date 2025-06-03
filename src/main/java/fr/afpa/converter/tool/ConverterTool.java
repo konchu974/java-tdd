@@ -1,17 +1,29 @@
 package fr.afpa.converter.tool;
 
-import java.math.BigInteger;
-import java.util.regex.Pattern;
+
 
 /**
  * Classe utilitaire permettant de passer des nombres d'une base à l'autre.
- * 
  * Base suportées:
  * - binaire
  * - décimale 
  * - hexadécimale
  */
 public final class ConverterTool {
+
+    static String[] binaires = {
+            "0000", "0001", "0010", "0011",
+            "0100", "0101", "0110", "0111",
+            "1000", "1001", "1010", "1011",
+            "1100", "1101", "1110", "1111"
+    };
+
+    static char[] hexadecimaux = {
+            '0', '1', '2', '3',
+            '4', '5', '6', '7',
+            '8', '9', 'A', 'B',
+            'C', 'D', 'E', 'F'
+    };
 
     /**
      * Constructeur privé pour cacher celui déclaré par défaut en public.
@@ -60,21 +72,6 @@ public final class ConverterTool {
     public static String binaryToHexadecimal(String binary) {
         String result = "";
 
-        String[] binaires = {
-                "0000", "0001", "0010", "0011",
-                "0100", "0101", "0110", "0111",
-                "1000", "1001", "1010", "1011",
-                "1100", "1101", "1110", "1111"
-        };
-
-        char[] hexadecimaux = {
-                '0', '1', '2', '3',
-                '4', '5', '6', '7',
-                '8', '9', 'A', 'B',
-                'C', 'D', 'E', 'F'
-        };
-
-
         while (binary.length() % 4 != 0) {
         binary = "0" + binary ;
         }
@@ -87,6 +84,7 @@ public final class ConverterTool {
                 if (sousChaine.equals(binaires[j])) {
                     result += hexadecimaux[j];
                 }
+
             }
         }
 
@@ -102,12 +100,6 @@ public final class ConverterTool {
      */
     public static String decimalToHexadecimal(int decimal) {
         String result = "";
-        char[] hexadecimaux = {
-                '0', '1', '2', '3',
-                '4', '5', '6', '7',
-                '8', '9', 'A', 'B',
-                'C', 'D', 'E', 'F'
-        };
 
         while (decimal > 0) {
             int remainder = decimal % 16;
@@ -121,29 +113,16 @@ public final class ConverterTool {
     /**
      * Convertit un nombre hexadécimal en sa représentation décimale.
      * 
-     * @param decimal Nombre décimal à traiter
+     * @param hexadecimal Nombre décimal à traiter
      * @return Répresentation binaire du nombre
      */
     public static int hexadecimalToDecimal(String hexadecimal) {
-        int result = Integer.parseInt(hexadecimal, 16);;
+        int result = Integer.parseInt(hexadecimal, 16);
         return result;
     }
 
     public static String hexadecimalToBinary(String hex) {
         String result = "";
-        String[] binaires = {
-                "0000", "0001", "0010", "0011",
-                "0100", "0101", "0110", "0111",
-                "1000", "1001", "1010", "1011",
-                "1100", "1101", "1110", "1111"
-        };
-
-        char[] hexadecimaux = {
-                '0', '1', '2', '3',
-                '4', '5', '6', '7',
-                '8', '9', 'A', 'B',
-                'C', 'D', 'E', 'F'
-        };
 
         for (int i = 0; i < hex.length(); i++) {
             for (int j = 0; j < hexadecimaux.length; j++) {
